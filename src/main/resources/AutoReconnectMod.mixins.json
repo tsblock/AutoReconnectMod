@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "me.tsblock.autoreconnectmod.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinDisconnectedScreen"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
