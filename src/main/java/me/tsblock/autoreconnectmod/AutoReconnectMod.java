@@ -5,7 +5,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.event.client.ClientTickCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ConnectScreen;
 import net.minecraft.client.gui.screen.DisconnectedScreen;
+import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.network.ServerInfo;
 
 @Environment(EnvType.CLIENT)
@@ -16,6 +18,7 @@ public class AutoReconnectMod implements ClientModInitializer {
     public static boolean enabled;
     @Override
     public void onInitializeClient() {
+        enabled = true;
         ClientTickCallback.EVENT.register(minecraftClient -> onClientTick());
     }
 
@@ -25,7 +28,28 @@ public class AutoReconnectMod implements ClientModInitializer {
             lastServerInfo = minecraft.getCurrentServerEntry();
         }
         if (minecraft.currentScreen instanceof DisconnectedScreen) {
+            if (enabled) {
+                countdownTick++;
+                if (countdownTick > reconnectTick) {
+                    countdownTick = 0;
+                    minecraft.disconnect();
+                    minecraft.openScreen(new ConnectScreen(new TitleScreen(), minecraft, lastServerInfo));
+                }
+            } else {
+                countdownTick = 0;
+            }
+        }
+    }
 
+    public static String getStatusText() {
+        return AutoReconnectMod.enabled ? "§aON§r" : "§cOFF§r";
+    }
+
+    public static String getTimeLeft() {
+        if (enabled) {
+            return " (" + String.valueOf((reconnectTick - countdownTick) / 20) + ")";
+        } else {
+            return "";
         }
     }
 }
