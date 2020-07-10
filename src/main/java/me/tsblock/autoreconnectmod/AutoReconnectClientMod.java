@@ -11,7 +11,7 @@ import net.minecraft.client.gui.screen.TitleScreen;
 import net.minecraft.client.network.ServerInfo;
 
 @Environment(EnvType.CLIENT)
-public class AutoReconnectMod implements ClientModInitializer {
+public class AutoReconnectClientMod implements ClientModInitializer {
     public static ServerInfo lastServerInfo;
     public static int countdownTick;
     public static int reconnectTick = 5 * 20;
@@ -42,7 +42,7 @@ public class AutoReconnectMod implements ClientModInitializer {
     }
 
     public static String getStatusText() {
-        return AutoReconnectMod.enabled ? "§aON§r" : "§cOFF§r";
+        return AutoReconnectClientMod.enabled ? "§aON§r" : "§cOFF§r";
     }
 
     public static String getTimeLeft() {
@@ -51,5 +51,9 @@ public class AutoReconnectMod implements ClientModInitializer {
         } else {
             return "";
         }
+    }
+
+    public static ServerInfo getLastServerInfo() {
+        return lastServerInfo;
     }
 }

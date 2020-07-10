@@ -12,15 +12,18 @@
   "environment": "client",
   "entrypoints": {
     "client": [
-      "me.tsblock.autoreconnectmod.AutoReconnectMod"
+      "me.tsblock.autoreconnectmod.AutoReconnectClientMod"
     ]
   },
   "mixins": [
     "AutoReconnectMod.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.7.8+build.189",
+    "fabricloader": ">=0.8.9+build.203",
     "fabric": "*",
-    "minecraft": "1.15.2"
+    "minecraft": "1.16.1"
+  },
+  "custom": {
+    "modmenu:clientsideOnly": true
   }
 }

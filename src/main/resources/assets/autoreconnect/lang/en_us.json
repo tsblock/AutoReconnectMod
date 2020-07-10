@@ -1,3 +1,4 @@
 {
-  "gui.autoreconnect.reconnectbutton": "Auto Reconnect (%d)%d"
+  "gui.autoreconnect.autoreconnectbutton": "Auto Reconnect (%d)%d",
+  "gui.autoreconnect.reconnectbutton":  "Reconnect"
 }
